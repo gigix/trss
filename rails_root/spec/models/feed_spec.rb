@@ -41,5 +41,16 @@ describe Feed do
       first_item.content.should == %Q(<table><tr><td width="80px"><a href="http://movie.douban.com/subject/4286017/" title="Fast Five"><img src="http://img3.douban.com/spic/s4672723.jpg" alt="Fast Five"></a></td><td></td></tr></table>)
       first_item.link.should == "http://movie.douban.com/subject/4286017/"
     end
+    
+    it "does not duplicate feed items" do
+      rss_content = File.open(File.join(Rails.root, "spec", "fixtures", "sample.rss")){|f| f.read}
+      feed = Feed.create!(:url => "http://test.com/sample.rss")
+      feed.stub!(:fetch_content).and_return(rss_content)
+      
+      feed.fetch!
+      feed.fetch!
+      
+      feed.feed_items.size.should == 10
+    end
   end
 end
