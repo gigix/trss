@@ -1,17 +1,16 @@
-<h2>Sign in</h2>
-
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <p><%= f.label :email %><br />
-  <%= f.email_field :email %></p>
+  <div><%= f.label :email, "Email地址" %><br />
+  <%= f.email_field :email, :size => 20 %></div>
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
+  <div>
+	<%= f.label :password, "密码" %><br />
+  	<%= f.password_field :password, :size => 20 %>
+	<div class="helper_below"><%= link_to "忘记密码了？", new_password_path(resource_name) %></div>
+  </div>
 
   <% if devise_mapping.rememberable? -%>
-    <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
+    <div class='checkbox_container'><%= f.check_box :remember_me %> <%= f.label :remember_me, "记住我" %></div>
   <% end -%>
 
-  <p><%= f.submit "Sign in" %></p>
+  <div><%= f.submit "Sign in" %></div>
 <% end %>
-
-<%= render :partial => "devise/shared/links" %>

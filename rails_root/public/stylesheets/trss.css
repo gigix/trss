@@ -1,0 +1,78 @@
+body {
+	background-color: #F8FBFD;
+    margin: 0;
+    padding: 0;
+
+	color: #333333;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 100%;
+    line-height: 1.4;
+}
+
+.wrap_all {
+	margin: 0 auto;
+	padding: 0 20px;
+	width: 960px;
+}
+
+a {
+    color: #0059F6;
+    outline: medium none;
+    text-decoration: none;
+}
+
+.helper_below {
+    color: #999999;
+    font-size: 0.75em;
+    font-style: italic;
+    margin-top: -22px;
+}
+
+div.clear {
+	clear: both;
+	height: 1%;
+}
+
+input {
+    font-family: Helvetica,Arial,sans-serif;
+}
+
+input[type="submit"], input[type="button"] {
+    background-color: #0059F6;
+    border: 0 none;
+    border-radius: 44px;
+    color: #F8FBFD;
+    cursor: pointer;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 10px 0;
+    min-width: 222px;
+    padding: 27px 44px 21px;
+    text-align: center;
+}
+
+label {
+	font-weight: bold;
+}
+
+input[type="text"], input[type="password"], input[type="email"], textarea {
+    color: #999999;
+    display: inline-block;
+    font-family: inherit;
+    font-size: 2.25em;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    max-width: 630px;
+    padding: 2px;
+}
+
+input[type="checkbox"] {
+    -moz-transform: scale(1.8, 1.8);
+    display: inline-block;
+    margin: 10px 10px 14px 6px;
+    vertical-align: middle;
+}
+
+.checkbox_container {
+	margin-top: 20px;
+}
