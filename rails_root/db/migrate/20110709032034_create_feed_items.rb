@@ -3,7 +3,11 @@ class CreateFeedItems < ActiveRecord::Migration
     create_table :feed_items do |t|
       t.references :feed
       
-      
+      t.string :title
+      t.string :link
+      t.text :content
+
+      t.datetime :edited_at
 
       t.timestamps
     end

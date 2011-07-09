@@ -3,7 +3,7 @@ class CreateFeeds < ActiveRecord::Migration
     create_table :feeds do |t|
       t.references :user
       
-      t.string :name
+      t.string :title
       t.string :url
 
       t.timestamps

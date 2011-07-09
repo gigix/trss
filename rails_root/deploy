@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ssh trss@thoughtworkers.org "cd trss/rails_root && git checkout . && git pull && touch tmp/restart.txt"

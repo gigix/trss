@@ -14,13 +14,17 @@ ActiveRecord::Schema.define(:version => 20110709032034) do
 
   create_table "feed_items", :force => true do |t|
     t.integer  "feed_id"
+    t.string   "title"
+    t.string   "link"
+    t.text     "content"
+    t.datetime "edited_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "feeds", :force => true do |t|
     t.integer  "user_id"
-    t.string   "name"
+    t.string   "title"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
