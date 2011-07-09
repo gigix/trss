@@ -1,0 +1,2 @@
+MAILTO=gigix1980@gmail.com
+*/15 * * * * bash -lc "cd /home/trss/trss/rails_root && /home/trss/.gems/bin/bundle exec rails runner -e production script/fetch.rb"
