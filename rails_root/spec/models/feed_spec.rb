@@ -1,6 +1,17 @@
 require 'spec_helper'
 
 describe Feed do
+  describe :create! do
+    it "does not allow duplication under same user" do
+      user = create_test_user
+      user.feeds.create!(:url => "http://www.douban.com/feed/people/gigix/interests")
+      
+      lambda do
+        user.feeds.create!(:url => "http://www.douban.com/feed/people/gigix/interests")
+      end.should raise_error
+    end
+  end
+  
   describe :fetch! do
     it "actually grabs rss" do
       feed = Feed.create!(:url => "http://www.douban.com/feed/people/gigix/interests")

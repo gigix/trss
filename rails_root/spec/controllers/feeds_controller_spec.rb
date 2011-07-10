@@ -36,6 +36,9 @@ describe FeedsController do
       new_feed = Feed.find(:last)
       new_feed.user.should == user
       new_feed.url.should == rss_url
-    end
+      
+      new_feed.title.should_not be_nil
+      new_feed.items.should_not be_empty
+    end    
   end
 end

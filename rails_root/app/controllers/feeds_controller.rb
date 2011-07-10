@@ -6,7 +6,10 @@ class FeedsController < ApplicationController
   end
   
   def create
-    current_user.feeds.create!(params[:feed])
+    new_feed = current_user.feeds.create!(params[:feed])
+    new_feed.fetch!
+  rescue
+  ensure
     redirect_to feeds_path
   end
 end

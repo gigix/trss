@@ -1,6 +1,8 @@
+<% title '我的RSS' %>
+
 <%= form_for(@feed, :url => feeds_path) do |f| %>
 	<%= f.text_field :url %>
-	<%= f.submit 'Add New Feed' %>
+	<%= f.submit '添加RSS' %>
 <% end %>
 
 <ul>

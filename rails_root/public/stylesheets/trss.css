@@ -117,6 +117,21 @@ label {
 	font-weight: bold;
 }
 
+.field_with_errors input {
+	border-color: red;
+}
+
+.field_with_errors label {
+	color: red;
+}
+
+#error_explanation {
+	float: right;
+	width: 450px;
+	background-color: yellow;
+	padding: 20px;
+}
+
 input[type="text"], input[type="password"], input[type="email"], textarea {
     color: #999999;
     display: inline-block;
@@ -124,6 +139,7 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
     font-size: 2.25em;
     line-height: 1.2;
     margin-bottom: 24px;
+	margin-right: 24px;
     max-width: 630px;
     padding: 2px;
 }
