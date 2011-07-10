@@ -9,6 +9,68 @@ body {
     line-height: 1.4;
 }
 
+.title h1 {
+	color: #333333;
+    float: left;
+    font-family: "ff-meta-serif-web-pro-1","ff-meta-serif-web-pro-2",Georgia;
+    font-size: 60px;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0;
+    padding: 8px 4px 10px 0;
+}
+
+.title h1 .logo_box_nerd_shit {
+    border: 6px solid #333333;
+    display: inline-block;
+    height: 28px;
+    margin-right: 17px;
+    width: 28px;
+}
+
+.title h1 .logo_box_nerd_shit:hover {
+	background: url("/images/home_link_small.png") no-repeat scroll 0 -7px transparent;
+}
+
+.title h1 .logo_box_nerd_shit .even_nerdier_shit {
+    border-left: 6px solid #F8FBFD;
+    border-right: 6px solid #F8FBFD;
+    height: 8px;
+    left: -6px;
+    position: relative;
+    top: 10px;
+    width: 28px;
+}
+
+.nav_right_side {
+    padding: 0 5px 1em;
+    width: 950px;
+}
+
+.header_nav {
+    position: absolute;
+    right: 10px;
+    top: -8px;
+
+    float: right;
+    margin: 0;
+    width: 350px;
+}
+
+.header_nav a {
+	background-color: #0056F9;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: #F8FBFD;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+	text-align: center;
+    padding: 12px 0;
+    width: 190px;
+}
+
 .wrap_all {
 	margin: 0 auto;
 	padding: 0 20px;
