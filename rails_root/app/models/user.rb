@@ -7,5 +7,14 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   
+  has_one  :sina_weibo, :class_name => "SinaWeiboToken", :dependent => :destroy
+  
   has_many :feeds
+  has_many :feed_items, :through => :feeds
+  
+  def sync!
+    feed_items.each do |item|
+      sina_weibo.add_status!(item.title)
+    end
+  end
 end

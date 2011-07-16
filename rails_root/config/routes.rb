@@ -3,6 +3,11 @@ RailsRoot::Application.routes.draw do
   
   resources :feeds
   
+  resources :oauth_consumers do
+      get :callback, :on => :member
+  end
+  
+  
   root :to => "feeds#index"
 
   # The priority is based upon order of creation:
