@@ -1,6 +1,8 @@
 RailsRoot::Application.routes.draw do
   devise_for :users
   
+  resources :home
+  
   resources :feeds
   
   resources :oauth_consumers do
