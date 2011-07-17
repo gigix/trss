@@ -3,7 +3,7 @@ require 'open-uri'
 
 class Feed < ActiveRecord::Base
   belongs_to :user
-  has_many :feed_items
+  has_many :feed_items, :order => "created_at DESC"
   
   alias_method :items, :feed_items
   

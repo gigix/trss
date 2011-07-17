@@ -30,7 +30,7 @@ describe Feed do
       feed.title.should == "Google Buzz Public Activities Feed for Jeff Xiong"
       feed.feed_items.size.should == 20
 
-      first_item = feed.feed_items.first
+      first_item = feed.feed_items.last
       first_item.title.should == "百年老店的基因"
       first_item.content.should == "百年老店的基因"
       first_item.link.should == "https://profiles.google.com/gigix1980/posts/DtnJbjFyGL1"
@@ -47,7 +47,7 @@ describe Feed do
       feed.title.should == "透明 的收藏"
       feed.feed_items.size.should == 10
 
-      first_item = feed.feed_items.first
+      first_item = feed.feed_items.last
       first_item.title.should == "想看速度与激情5"
       first_item.content.should == %Q(<table><tr><td width="80px"><a href="http://movie.douban.com/subject/4286017/" title="Fast Five"><img src="http://img3.douban.com/spic/s4672723.jpg" alt="Fast Five"></a></td><td></td></tr></table>)
       first_item.link.should == "http://movie.douban.com/subject/4286017/"
