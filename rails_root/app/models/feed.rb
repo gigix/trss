@@ -7,7 +7,8 @@ class Feed < ActiveRecord::Base
   
   alias_method :items, :feed_items
   
-  validate :duplication_is_not_allowed
+  validate :url_duplication_is_not_allowed
+  after_create :activate!
   
   def fetch!
     content = fetch_content
@@ -17,6 +18,23 @@ class Feed < ActiveRecord::Base
       next if already_fetched?(item)
       feed_items.create!(:title => item.trss_title, :content => item.trss_content, :link => item.trss_link)
     end
+  end
+
+  class Status
+    ACTIVE = 'active'
+    INACTIVE = 'inactive'
+  end
+  
+  def active?
+    status == Status::ACTIVE
+  end
+  
+  def inactivate!
+    update_attribute(:status, Status::INACTIVE)
+  end
+  
+  def activate!
+    update_attribute(:status, Status::ACTIVE)
   end
   
   private
@@ -28,7 +46,7 @@ class Feed < ActiveRecord::Base
     not feed_items.find_by_link(raw_item.trss_link).nil?
   end
   
-  def duplication_is_not_allowed
+  def url_duplication_is_not_allowed
     errors.add(:url, "Duplicated") if Feed.find_by_user_id_and_url(user, self.url)
-  end
+  end  
 end

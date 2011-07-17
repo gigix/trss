@@ -1,1 +1,1 @@
-<li><%= link_to (feed.title || "<未抓取>") + " (#{feed.items.count} items)", feed.url %></li>
+<li><%= render_feed_title feed %></li>

@@ -48,6 +48,52 @@ describe FeedsController do
       
       new_feed.title.should_not be_nil
       new_feed.items.should_not be_empty
-    end    
+    end  
+    
+    it "activates existing feed" do
+      user = create_test_user
+      sign_in user 
+      
+      rss_url = "http://www.douban.com/feed/people/gigix/interests"
+      feed = user.feeds.create!(:url => rss_url)
+      feed.inactivate!
+      
+      lambda do
+        post :create, :feed => {:url => rss_url}
+        response.should redirect_to(feeds_path)
+      end.should_not change(Feed, :count)
+      
+      feed.reload.should be_active
+    end  
+  end
+  
+  describe :destroy do
+    it "redirects to signin page if no user signed in" do
+      delete :destroy, :id => 1
+      response.should redirect_to(new_user_session_path)
+    end
+    
+    it "redirects to signin page if user tries to destroy a feed belongs to other" do
+      first_user = create_test_user
+      feed = first_user.feeds.create!
+      
+      second_user = create_test_user
+      sign_in second_user
+      
+      delete :destroy, :id => feed.id
+      response.should redirect_to(new_user_session_path)
+    end
+    
+    it "sets feed status to 'inactive'" do
+      user = create_test_user
+      sign_in user
+      feed = user.feeds.create!
+      feed.should be_active
+      
+      delete :destroy, :id => feed.id
+
+      response.should redirect_to(root_path)
+      feed.reload.should_not be_active
+    end
   end
 end
