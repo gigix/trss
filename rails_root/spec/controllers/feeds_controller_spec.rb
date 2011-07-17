@@ -75,7 +75,7 @@ describe FeedsController do
     
     it "redirects to signin page if user tries to destroy a feed belongs to other" do
       first_user = create_test_user
-      feed = first_user.feeds.create!
+      feed = first_user.feeds.create!(:url => "http://test.com/path")
       
       second_user = create_test_user
       sign_in second_user
@@ -87,7 +87,7 @@ describe FeedsController do
     it "sets feed status to 'inactive'" do
       user = create_test_user
       sign_in user
-      feed = user.feeds.create!
+      feed = user.feeds.create!(:url => "http://test.com/path")
       feed.should be_active
       
       delete :destroy, :id => feed.id

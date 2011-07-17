@@ -10,6 +10,13 @@ describe Feed do
         user.feeds.create!(:url => "http://www.douban.com/feed/people/gigix/interests")
       end.should raise_error
     end
+    
+    it "does not allow empty url" do
+      user = create_test_user
+      lambda do
+        user.feeds.create!(:url => " ")      
+      end.should raise_error
+    end
   end
   
   describe :fetch! do

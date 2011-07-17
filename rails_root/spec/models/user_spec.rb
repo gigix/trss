@@ -29,7 +29,7 @@ describe User do
     end
     
     it 'syncs feed items to micro blog' do
-      feed = @user.feeds.create!
+      feed = @user.feeds.create!(:url => "http://test.com/path")
       feed_item = feed.feed_items.create!(:title => "something", :link => "http://some.site/path")
       @access_token.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path>"})
       
@@ -37,7 +37,7 @@ describe User do
     end
     
     it 'does not sync feed items which were synced already' do
-      feed = @user.feeds.create!
+      feed = @user.feeds.create!(:url => "http://test.com/path")
       feed.feed_items.create!(:title => "something", :link => "http://some.site/path")
       @access_token.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path>"})
       
@@ -46,7 +46,7 @@ describe User do
     end
     
     it 'does not sync feed items in inactive feeds' do
-      feed = @user.feeds.create!
+      feed = @user.feeds.create!(:url => "http://test.com/path")
       feed.feed_items.create!(:title => "something", :link => "http://some.site/path")
       inactive_feed = @user.feeds.create!(:url => "http://inactive.feed")
       inactive_feed.inactivate!

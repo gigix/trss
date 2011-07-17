@@ -7,7 +7,7 @@ class Feed < ActiveRecord::Base
   
   alias_method :items, :feed_items
   
-  validate :url_duplication_is_not_allowed
+  validate :url_duplication_is_not_allowed, :empty_url_is_not_allowed
   after_create :activate!
   
   def fetch!
@@ -49,4 +49,8 @@ class Feed < ActiveRecord::Base
   def url_duplication_is_not_allowed
     errors.add(:url, "Duplicated") if Feed.find_by_user_id_and_url(user, self.url)
   end  
+  
+  def empty_url_is_not_allowed
+    errors.add(:url, "Empty") if self.url.strip.empty?
+  end
 end
