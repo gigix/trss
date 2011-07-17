@@ -1,10 +1,12 @@
 == DONE ==
 Create a cron job to fetch feeds
-
-
-== DOING ==
 Publish items to Sina Weibo (Don't duplicate, either)
 
 
-== TODO ==
+== DOING ==
 Show fetched feed items in TRSS site (instead of link to origin directly)
+
+
+== TODO ==
+Decent UI so that TRSS could be promoted as a standalone website
+Support multiple output channels (twitter, fanfou, etc)
