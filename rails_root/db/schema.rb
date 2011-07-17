@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20110713135416) do
     t.string   "link"
     t.text     "content"
     t.datetime "edited_at"
+    t.datetime "synced_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

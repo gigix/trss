@@ -8,6 +8,7 @@ class CreateFeedItems < ActiveRecord::Migration
       t.text :content
 
       t.datetime :edited_at
+      t.datetime :synced_at
 
       t.timestamps
     end

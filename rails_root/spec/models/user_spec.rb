@@ -8,16 +8,27 @@ describe User do
   end
   
   describe :sync! do
+    before(:each) do
+      @weibo = SinaWeiboToken.new
+      @user = create_test_user
+      @user.sina_weibo = @weibo
+    end
+    
     it 'syncs feed items to micro blog' do
-      weibo = SinaWeiboToken.new
-      weibo.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something"})
+      feed = @user.feeds.create!
+      feed.feed_items.create!(:title => "something", :link => "http://some.site/path")
+      @weibo.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path>"})
       
-      user = create_test_user
-      user.sina_weibo = weibo
-      feed = user.feeds.create!
-      feed.feed_items.create!(:title => "something")
+      @user.sync!
+    end
+    
+    it 'does not sync feed items which were synced already' do
+      feed = @user.feeds.create!
+      feed.feed_items.create!(:title => "something", :link => "http://some.site/path")
+      @weibo.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path>"})
       
-      user.sync!
+      @user.sync!
+      @user.sync!
     end
   end
 end

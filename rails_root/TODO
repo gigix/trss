@@ -1,2 +1,10 @@
+== DONE ==
 Create a cron job to fetch feeds
+
+
+== DOING ==
 Publish items to Sina Weibo (Don't duplicate, either)
+
+
+== TODO ==
+Show fetched feed items in TRSS site (instead of link to origin directly)

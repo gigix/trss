@@ -13,8 +13,9 @@ class User < ActiveRecord::Base
   has_many :feed_items, :through => :feeds
   
   def sync!
-    feed_items.each do |item|
-      sina_weibo.add_status!(item.title)
+    feed_items.find_all_by_synced_at(nil).each do |item|
+      sina_weibo.add_status!(item.to_t)
+      item.update_attribute(:synced_at, Time.now)
     end
   end
 end

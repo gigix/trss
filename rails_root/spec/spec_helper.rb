@@ -32,5 +32,5 @@ def mock_user(stubs={})
 end
 
 def create_test_user
-  User.create!(:email => 'new_user@test.com', :password => 'P@55w0rd', :time_zone_name => 'Beijing')
+  User.create!(:email => 'new_user@test.com', :password => 'P@55w0rd')
 end
