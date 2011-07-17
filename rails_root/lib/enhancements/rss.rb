@@ -4,6 +4,10 @@ RSS::Atom::Feed.class_eval do
   def trss_title
     title.content
   end
+  
+  def mime_type
+    "application/atom+xml"
+  end
 end
 
 RSS::Atom::Feed::Entry.class_eval do
@@ -23,6 +27,10 @@ end
 RSS::Rss.class_eval do
   def trss_title
     channel.title
+  end
+  
+  def mime_type
+    "application/rss+xml"
   end
 end
 

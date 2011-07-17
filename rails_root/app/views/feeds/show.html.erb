@@ -1,5 +1,10 @@
 <% title '频道浏览' %>
+<% rss @feed %>
 
-<h2><%= @feed.title %></h2>
+<div class="feed_title">
+	<h2><%= @feed.title %></h2>
+	<div class="feed_info"><%= link_to "订阅", @feed.url %></div>
+	<div class="clear"></div>
+</div>
 
 <%= render :partial => "feed_item", :collection => @feed.items %>

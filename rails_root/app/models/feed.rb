@@ -13,7 +13,11 @@ class Feed < ActiveRecord::Base
   def fetch!
     content = fetch_content
     raw_feed = RSS::Parser.parse(content, false)
+    
+    #TODO: should use update_attributes once, instead of update_attribute twice
     update_attribute(:title, raw_feed.trss_title)
+    update_attribute(:mime_type, raw_feed.mime_type)
+    
     raw_feed.items.each do |item|
       next if already_fetched?(item)
       feed_items.create!(:title => item.trss_title, :content => item.trss_content, :link => item.trss_link)

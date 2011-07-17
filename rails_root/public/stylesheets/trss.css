@@ -9,6 +9,10 @@ body {
     line-height: 1.4;
 }
 
+.clear {
+	clear: both;
+}
+
 .title h1 {
     float: left;
     font-family: "ff-meta-serif-web-pro-1","ff-meta-serif-web-pro-2",Georgia;
@@ -187,4 +191,16 @@ dl dd {
 dl dd .feed_item_info {
 	color: #999;
 	font-size: 12px;
+}
+
+.feed_title h2 {
+	float: left;
+}
+
+.feed_title .feed_info {
+	padding-top: 25px;
+}
+
+.feed_title .feed_info a {
+	padding-left: 15px;
 }
