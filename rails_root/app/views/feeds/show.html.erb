@@ -1,0 +1,5 @@
+<% title '频道浏览' %>
+
+<h2><%= @feed.title %></h2>
+
+<%= render :partial => "feed_item", :collection => @feed.items %>

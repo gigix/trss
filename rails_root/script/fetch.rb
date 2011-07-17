@@ -1,5 +1,5 @@
 User.find(:all).each do |user|
-    user.feeds.each do |feed|
+    user.active_feeds.each do |feed|
       begin 
         feed.fetch!
       rescue => e

@@ -30,7 +30,7 @@ describe User do
     
     it 'syncs feed items to micro blog' do
       feed = @user.feeds.create!
-      feed.feed_items.create!(:title => "something", :link => "http://some.site/path")
+      feed_item = feed.feed_items.create!(:title => "something", :link => "http://some.site/path")
       @access_token.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path>"})
       
       @user.sync!

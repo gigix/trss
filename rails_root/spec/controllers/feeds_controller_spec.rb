@@ -96,4 +96,14 @@ describe FeedsController do
       feed.reload.should_not be_active
     end
   end
+  
+  describe :show do
+    it "renders with specified feed" do
+      feed = create_test_user.feeds.create(:url => "http://www.douban.com/feed/people/gigix/interests")
+      get :show, :id => feed.id
+
+      response.should be_success
+      assigns(:feed).should == feed
+    end
+  end
 end

@@ -1,9 +1,13 @@
 class FeedsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => :show
   
   def index
     redirect_to oauth_consumer_path(:sina_weibo) and return unless current_user.sina_weibo
     @feed = Feed.new
+  end
+  
+  def show
+    @feed = Feed.find(params[:id])
   end
   
   def create
