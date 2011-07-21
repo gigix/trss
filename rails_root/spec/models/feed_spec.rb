@@ -17,6 +17,14 @@ describe Feed do
         user.feeds.create!(:url => " ")      
       end.should raise_error
     end
+    
+    it "handles html page with alternate rss feed" do
+      feed = Feed.create!(:url => "http://www.thoughtworks.com/blogs")
+      feed.fetch!
+
+      feed.feed_items.size.should > 0
+      feed.url.should == "http://www.thoughtworks.com/blogs/rss/current"
+    end
   end
   
   describe :fetch! do

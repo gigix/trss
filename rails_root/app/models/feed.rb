@@ -1,5 +1,6 @@
 require 'rss'
 require 'open-uri'
+require 'hpricot'
 
 class Feed < ActiveRecord::Base
   belongs_to :user
@@ -11,7 +12,7 @@ class Feed < ActiveRecord::Base
   
   def fetch!
     content = fetch_content
-    raw_feed = RSS::Parser.parse(content, false)
+    raw_feed = parse_rss_content(content)
     
     #TODO: should use update_attributes once, instead of update_attribute multiple times
     update_attribute(:title, raw_feed.trss_title)
@@ -43,6 +44,15 @@ class Feed < ActiveRecord::Base
   end
   
   private
+  def parse_rss_content(content)
+    RSS::Parser.parse(content, false)
+  rescue
+    doc = Hpricot(content)
+    rss_uri = URI::join(url, doc.at("//link[@rel='alternate']")[:href])
+    update_attribute(:url, rss_uri.to_s)
+    RSS::Parser.parse(fetch_content, false)
+  end
+  
   def fetch_content
     open(url){|resource| resource.read}
   end
