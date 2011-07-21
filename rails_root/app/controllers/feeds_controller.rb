@@ -12,7 +12,7 @@ class FeedsController < ApplicationController
   
   def create
     existing_feed = current_user.feeds.find_by_url(params[:feed][:url])
-    existing_feed.activate! and return if existing_feed
+    existing_feed.fetch! and return if existing_feed
     
     new_feed = current_user.feeds.create!(params[:feed])
     new_feed.fetch!

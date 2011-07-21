@@ -8,13 +8,12 @@ class Feed < ActiveRecord::Base
   alias_method :items, :feed_items
   
   validate :url_duplication_is_not_allowed, :empty_url_is_not_allowed
-  after_create :activate!
   
   def fetch!
     content = fetch_content
     raw_feed = RSS::Parser.parse(content, false)
     
-    #TODO: should use update_attributes once, instead of update_attribute twice
+    #TODO: should use update_attributes once, instead of update_attribute multiple times
     update_attribute(:title, raw_feed.trss_title)
     update_attribute(:mime_type, raw_feed.mime_type)
     
@@ -22,6 +21,8 @@ class Feed < ActiveRecord::Base
       next if already_fetched?(item)
       feed_items.create!(:title => item.trss_title, :content => item.trss_content, :link => item.trss_link)
     end
+    
+    activate!
   end
 
   class Status
