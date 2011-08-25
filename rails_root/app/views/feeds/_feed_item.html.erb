@@ -4,6 +4,6 @@
 	<dt><h3><a name="<%= feed_item.id %>"><%= feed_item.title %></a></h3></dt>
 	<dd>
 		<div class="feed_item_info">来自<%= link_to feed.title, feed_path(feed) %> | <%= link_to "查看原文", feed_item.link %> | <%= feed_item.created_at.to_s(:short) %></div>
-		<div><%= feed_item.content.html_safe %></div>
+		<div><%= (feed_item.content || feed_item.title).html_safe %></div>
 	</dd>
 </dl>

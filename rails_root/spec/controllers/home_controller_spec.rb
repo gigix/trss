@@ -22,5 +22,14 @@ describe HomeController do
       assigns(:feed_items).first.title.should == "feed item 2-29"
       assigns(:feed_items).last.title.should == "feed item 1-5"
     end
+    
+    it "be tolerant even if feed has a nil content" do
+      user = create_test_user
+      feed = user.feeds.create!(:url => "http://test.com/path")
+      feed.feed_items.create!(:title => "feed without content")
+      
+      get :index
+      response.should be_success
+    end
   end
 end
