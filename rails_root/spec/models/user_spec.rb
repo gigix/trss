@@ -31,7 +31,7 @@ describe User do
     it 'syncs feed items to micro blog' do
       feed = @user.feeds.create!(:url => "http://test.com/path")
       feed_item = feed.feed_items.create!(:title => "something", :link => "http://some.site/path")
-      @access_token.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path>"})
+      @access_token.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path >"})
       
       @user.sync!
     end
@@ -39,7 +39,7 @@ describe User do
     it 'does not sync feed items which were synced already' do
       feed = @user.feeds.create!(:url => "http://test.com/path")
       feed.feed_items.create!(:title => "something", :link => "http://some.site/path")
-      @access_token.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path>"})
+      @access_token.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path >"})
       
       @user.sync!
       @user.sync!
@@ -51,7 +51,7 @@ describe User do
       inactive_feed = @user.feeds.create!(:url => "http://inactive.feed")
       inactive_feed.inactivate!
       inactive_feed.feed_items.create!(:title => "other thing", :link => "http://some.site/path1")
-      @access_token.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path>"})
+      @access_token.should_receive(:post).with("http://api.t.sina.com.cn/statuses/update.json", {:status => "something <http://some.site/path >"})
       
       @user.sync!
     end
