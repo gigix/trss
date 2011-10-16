@@ -50,6 +50,32 @@ describe Feed do
       first_item.content.should == "百年老店的基因"
       first_item.link.should == "https://profiles.google.com/gigix1980/posts/DtnJbjFyGL1"
     end
+    
+    it "parses atom with items which don't have content" do
+      rss_content = File.open(File.join(Rails.root, "spec", "fixtures", "google_reader_sample.atom")){|f| f.read}
+      feed = Feed.create!(:url => "http://test.com/google_reader_sample.atom")
+      feed.should_receive(:fetch_content).and_return(rss_content)
+      
+      feed.fetch!
+      feed.reload
+      
+      feed.title.should == "Gigix's shared items in Google Reader"
+      feed.feed_items.size.should == 20
+    end
+    
+    ["atom", "rss"].each do |format|
+      it "parses flickr #{format} feed" do
+        rss_content = File.open(File.join(Rails.root, "spec", "fixtures", "flickr_sample.#{format}")){|f| f.read}
+        feed = Feed.create!(:url => "http://test.com/flickr_sample.#{format}")
+        feed.should_receive(:fetch_content).and_return(rss_content)
+      
+        feed.fetch!
+        feed.reload
+      
+        feed.title.should == "Uploads from Gigix"
+        feed.feed_items.size.should == 20
+      end
+    end
 
     it "parses grabbed rss and stores new items" do
       rss_content = File.open(File.join(Rails.root, "spec", "fixtures", "sample.rss")){|f| f.read}

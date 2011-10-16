@@ -16,7 +16,7 @@ RSS::Atom::Feed::Entry.class_eval do
   end
   
   def trss_content
-    content.content
+    content.nil? ? summary.content : content.content
   end
   
   def trss_link

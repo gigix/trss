@@ -12,6 +12,7 @@ class Feed < ActiveRecord::Base
   
   def fetch!
     content = fetch_content
+    content.gsub!("date.Taken", "dateTaken") # This is to fix a known issue in Flickr feed
     raw_feed = parse_rss_content(content)
     
     #TODO: should use update_attributes once, instead of update_attribute multiple times
